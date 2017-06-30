@@ -1,5 +1,5 @@
 class StripeOauth < Struct.new( :user )
-
+  # Stripeの参考URL：https://github.com/rfunduk/rails-stripe-connect-example
   def oauth_url( params )
     url = client.authorize_url( {
       scope: 'read_write',
@@ -55,6 +55,7 @@ class StripeOauth < Struct.new( :user )
   # a 'code' that we can use to get the access token
   # and other details about our connected user.
   # See app/controllers/users_controller.rb#confirm for counterpart.
+  # Stripeの参考URL：https://stripe.com/docs/connect/standalone-accounts
   def verify!( code )
     data = client.get_token( code, {
       headers: {
@@ -74,6 +75,7 @@ class StripeOauth < Struct.new( :user )
 
   # Deauthorize the user. Straight-forward enough.
   # See app/controllers/users_controller.rb#deauthorize for counterpart.
+  # https://stripe.com/docs/connect/oauth-reference
   def deauthorize!
     response = RestClient.post(
       'https://connect.stripe.com/oauth/deauthorize',

@@ -16,7 +16,7 @@
                             <div class="col-md-12 select">
                                 <div class="form-group">
                                     <label>お家の種類</label>
-                                        <%= f.select :home_type, [["一軒家","一軒家"], ["マンション","マンション"], ["アパート","アパート"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
+                                    <%= f.select :home_type, [["一軒家","一軒家"], ["マンション","マンション"], ["アパート","アパート"]], {prompt:"選択してください"}, {required: 'true', autofocus: 'true', class: 'form-control'} %>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         </div>
                         <br>
                         <div class="actions">
-                        <%= f.submit "Save", class: "btn btn-danger" %>
+                        <%= f.submit "保存する", class: "btn btn-danger" %>
                         </div>
                     <% end %>
                 </div>

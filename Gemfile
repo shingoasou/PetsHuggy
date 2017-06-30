@@ -20,6 +20,7 @@ gem 'geocoder'
 gem 'jquery-ui-rails'
 gem 'stripe'
 gem 'rest-client'
+gem 'http-cookie'
 
 gem "private_pub"
 gem "thin"

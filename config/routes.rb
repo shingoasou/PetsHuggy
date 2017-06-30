@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
   resources :listings
-
-  root :to => 'pages#index' # pagesコントローラのindexアクションが実行される
+  
+  root to: "pages#index" # pagesコントローラのindexアクションを実行するURLを作成
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'registrations' }
   

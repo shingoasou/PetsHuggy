@@ -2,7 +2,7 @@ class StripeController < ApplicationController
   # Connect yourself to a Stripe account.
   # Only works on the currently logged in user.
   # See app/services/stripe_oauth.rb for #oauth_url details.
-  # 要約するとどのurlにリダイレクトさせるかというアクションです。
+  # どのurlにリダイレクトさせるかというアクション
   def oauth
     connector = StripeOauth.new( current_user )
     url, error = connector.oauth_url( redirect_uri: stripe_confirm_url )
@@ -29,7 +29,7 @@ class StripeController < ApplicationController
       # If we have an 'error' parameter, it's because the
       # user denied the connection request. Other errors
       # are handled at #oauth_url generation time.
-      flash[:error] = "Authorization request denied."
+      flash[:error] = "承認リクエストが拒否されました。"
     end
 
     redirect_to manage_listing_bankaccount_path( session[:listing_id] )
@@ -38,7 +38,7 @@ class StripeController < ApplicationController
   def deauthorize
     connector = StripeOauth.new( current_user )
     connector.deauthorize!
-    flash[:notice] = "Account disconnected from Stripe."
+    flash[:notice] = "Stripeアカウントが切断されました。"
     redirect_to manage_listing_bankaccount_path( session[:listing_id] )
   end
 

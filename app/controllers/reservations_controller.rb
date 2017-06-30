@@ -45,7 +45,7 @@ class ReservationsController < ApplicationController
         end
       end
 
-      #新しい日付の予約をクリエイトする
+      #新しい日付の予約を作成する
       if selectedDates
         selectedDates.each do |date|
           current_user.reservations.create(:listing_id => @listing.id,:start_date => date,:end_date => date,:self_booking => true)
@@ -65,12 +65,13 @@ class ReservationsController < ApplicationController
       fee = (amount.to_i * 0.1).to_i
 
       # Calculate the fee amount that goes to the application.
+      # Stripe支払いコード参考URL：https://stripe.com/docs/connect/destination-charges
       begin
         charge_attrs = {
           amount: amount,
           currency: user.currency,
           source: params[:token],
-          description: "Test Charge via Stripe Connect",
+          description: "Stripe接続：テスト課金",
           application_fee: fee
         }
 
@@ -81,11 +82,11 @@ class ReservationsController < ApplicationController
       charge = Stripe::Charge.create( charge_attrs )
 
         #have to edit view template to show html in flash
-        flash[:notice] = "Charged successfully!"
+        flash[:notice] = "課金は成功しました!"
 
       rescue Stripe::CardError => e
         error = e.json_body[:error][:message]
-        flash[:error] = "Charge failed! #{error}"
+        flash[:error] = "課金は失敗しました! #{error}"
       end
 
       # 予約をパラメーター付与して作成

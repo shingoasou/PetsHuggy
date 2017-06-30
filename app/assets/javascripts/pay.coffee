@@ -1,4 +1,5 @@
 # check this url
+# pay.coffeeの参考URL：https://github.com/rfunduk/rails-stripe-connect-example/blob/master/app/assets/javascripts/app/pay.coffee
 # https://stripe.com/docs/checkout#integration-custom
 $(document).ready ->
   return unless StripeCheckout?

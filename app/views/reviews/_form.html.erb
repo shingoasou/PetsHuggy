@@ -8,7 +8,9 @@
   <%= f.hidden_field :listing_id, value: @listing.id %>
   
   <div class="actions">
-      <%= f.submit "このシッターを評価する", class: "btn btn-danger" %>
+      <span class="pull-right">
+          <%= f.submit "送信", class: "btn btn-primary" %>
+      </span>
   </div>
 <% end %>
 

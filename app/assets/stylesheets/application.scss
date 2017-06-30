@@ -8,7 +8,7 @@
 .jumbotron {
   padding-top: 0px;
   // 背景画像を暗くする
-  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05) ), url(person-845325_1920.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.25)), url(ram.jpg);
   background-size: cover;
   // 背景画像の位置を決める
   background-position: 50% 50%;
@@ -17,7 +17,7 @@
 }
 
 .jumbotron .container .row {
-  margin-top: 100px;
+  margin-top: 85px;
   color: #fff;
 }
 
@@ -40,7 +40,7 @@
   background-color: #fff;
 }
 
-//navbar-deviseのcss
+// navbar-deviseのcss
 .navbar-devise {
   background: #fff;
   border-color: #fff;
@@ -62,7 +62,7 @@
   color: #555;
 }
 
-//facebookボタン
+// facebookボタン
 .btn-facebook {
   color: #fff;
   background-color: #4c66a4;
@@ -92,6 +92,7 @@
 .row-space-0 {
   margin-bottom: 0px;
 }
+
 .row-space-1 {
   margin-bottom: 10px;
 }
@@ -131,7 +132,7 @@
 
 @media (min-width: 992px) {
 .profile-full {
-  width: 100% !important;
+  width: 85% !important;
   height: 230px !important;
   }    
 }
@@ -145,7 +146,7 @@
   font-family: FontAwesome;
   position: relative;
   z-index: 100;
-  top:2px;
+  top: 2px;
   font-size: 1.55em;
   text-align: center;
   width: 1.25em;
@@ -216,7 +217,6 @@
   display: block;
 }
 
-
 // listings/indexのcss
 a.sidebar-item {
   font-size: 16px;
@@ -268,7 +268,6 @@ span.listing-title {
   .row-table, .col-middle {
     display: block;
   }
-
   .panel-list-img {
     height: 170px;
   }
@@ -300,7 +299,7 @@ span.listing-title {
   width: 85%;
 }
 
-//showページのデスクトップcss
+// showページのデスクトップcss
 @media (min-width: 992px){
   .panel-show {
     position: inherit;
@@ -316,7 +315,7 @@ span.listing-title {
   height: 180px;
 }
 
-//showページのデスクトップcss
+// showページのデスクトップcss
 @media (min-width: 992px) {
   .panel-listing img {
   height: 160px;
@@ -331,7 +330,7 @@ span.listing-title {
   padding: 7px 10px;
 }
 
-/*カレンダー用編集*/
+/* カレンダー用編集 */
 .class-holiday {
   background: #337ab7 !important;
   color: #fff !important;
@@ -500,7 +499,7 @@ footer ul.quicklinks {
   text-transform: none;
 }
 
-//topページコンテントのcss
+// topページコンテントのcss
 .portfolio-item a img {
   width: 100%;
   height: 200px;

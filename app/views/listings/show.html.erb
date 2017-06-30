@@ -2,28 +2,27 @@
 
 <!-- ジャンボトロン -->
 <div class="jumbotron row-space-0" style="margin-top: -20px; background: none;">
-    
-  <!-- カルーセル -->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">           
+  <!-- カルーセル参考URL：https://www.w3schools.com/bootstrap/bootstrap_carousel.asp -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- リストの点 -->
     <% if @photos.length > 1 %>
       <ol class="carousel-indicators">
         <% @photos.each do |photo| %>
             <li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
-        <% end %>   
-      </ol>             
-    <% end %>     
-
+        <% end %>
+      </ol>
+    <% end %>
+    
     <div class="carousel-inner" role="listbox">
-      <% if @photos %>             
+      <% if @photos %>
         <% @photos.each do |photo| %>
-          <div class="item <%= 'active' if photo.id == @photos[0].id %>">          
+          <div class="item <%= 'active' if photo.id == @photos[0].id %>">
             <%= image_tag photo.image.url(),style: "height:420px; width:100%; overflow:hidden;" %>
           </div>
-        <% end %>   
+        <% end %>
       <% end %>
     </div>
-      
+
     <!-- 左右の矢印 -->
     <% if @photos.length > 1%>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -36,7 +35,6 @@
       </a>
     <% end %>
   </div>
-
 </div>
 
 <!-- サマリー -->
@@ -80,10 +78,8 @@
                         <div class="panel-heading">
                                 <span style="font-size:16px;"><%= @listing.price_pernight %>円（一晩あたり）</span>
                         </div>
-                        
-                        <div class="panel-body panel-real">         
+                        <div class="panel-body panel-real">
                             <%= form_for [@listing, @listing.reservations.new], url: new_listing_reservation_path(@listing), html: {method: "get"} do |f| %>
-                                           
                                 <!-- これは、予約をするときに、一緒におくる、データです。-->
                                 <%= f.hidden_field :listing_id, value: @listing.id %>
                                 <%= f.hidden_field :price_pernight, value: @listing.price_pernight %>
@@ -91,44 +87,31 @@
 
                                 <div class="row row-space-2">
                                     <div class="col-md-6">
-                                        <label>Check In</label>
+                                        <label>開始日</label>
                                           <%= f.text_field :start_date, :class => 'form-control', placeholder: '開始' %>
                                     </div>
-
                                     <div class="col-md-6">
-                                        <label>Check Out</label>
+                                        <label>終了日</label>
                                         <%= f.text_field :end_date, :class => 'form-control', placeholder: '終了',disabled:true %>
                                     </div>
                                 </div>    
 
                                 <!-- シッター料金 -->
                                 <div id="sitter-price" class="row row-space-2 hidden">
-                                    <div class="col-md-8 col-xs-8">
-                                        
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        
-                                    </div>
+                                    <div class="col-md-8 col-xs-8"></div>
+                                    <div class="col-md-4 col-xs-4"></div>
                                 </div>
 
                                 <!-- 手数料 -->
                                 <div id="applicaton-fee" class="row row-space-2 hidden">
-                                    <div class="col-md-8 col-xs-8">
-                                        
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        
-                                    </div>
+                                    <div class="col-md-8 col-xs-8"></div>
+                                    <div class="col-md-4 col-xs-4"></div>
                                 </div>
 
                                 <!-- 合計料金 -->
                                 <div id="total-price" class="row row-space-2 hidden">
-                                    <div class="col-md-8 col-xs-8">
-                                        
-                                    </div>
-                                    <div class="col-md-4 col-xs-4">
-                                        
-                                    </div>
+                                    <div class="col-md-8 col-xs-8"></div>
+                                    <div class="col-md-4 col-xs-4"></div>
                                 </div>
 
                                 <!-- エラーメッセージ -->
@@ -136,7 +119,7 @@
                                     <div class="col-md-12 text-center">
                                         <label class="error">その日程は予約できません</label>
                                     </div>
-                                </div>        
+                                </div>
 
                                 <div class="actions text-center">
                                     <%= f.submit "この日程で予約する", class: "btn btn-danger btn-wide" %>
@@ -155,29 +138,27 @@
     <div class="row">
         <div class="col-md-9">
             <h3 class="row-space-3">このリスティングについて</h3>
-                <p><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %><%= @listing.listing_content %>
-                </p>
+                <p><%= @listing.listing_content %></p>
         </div>
 
         <div class="col-md-3">
-            
         </div>
     </div>  
 
-    <!-- レビュー    -->
+    <!-- レビュー -->
     <div class="row row-space-4">
         <div class="col-md-9">
-            <h3 class="row-space-3">レビュー<%= @reviews.count %>件</h3>
+            <h3 class="row-space-3">このリスティングのレビュー総合評価： <%= @reviews.count %>件 </h3>
             <div id="average_star_rate"></div>
-            <%=render 'reviews/form' if @currentUserBooking && !@currentUserReview %>
+            <br>
+            お客様のレビュー： <%=render 'reviews/form' if @currentUserBooking && !@currentUserReview %>
+            <br>
             <%=render 'reviews/list' %>
         </div>
-        <div class="col-md-3">
-            
-        </div>
+        <div class="col-md-3"></div>
     </div>
     
-    <!-- Google Map    -->
+    <!-- Google Map -->
     <div class="row">
         <div class="col-md-9">
             <h3 class="row-space-3">アクセス</h3>
@@ -185,7 +166,6 @@
         </div>
 
         <div class="col-md-3">
-        
         </div>
     </div>
     <style>
@@ -195,7 +175,7 @@
       }
     </style>
     
-    <!-- 近くのリスティング    -->
+    <!-- 近くのリスティング -->
     <div class="row">
         <div class="col-md-9">
             <h3 class="row-space-3">近くのリスティング</h3>
@@ -205,7 +185,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-listing text-center" style="padding: 0;">
                             <%= link_to(listing) do %>
-                                <%= image_tag listing.photos[0].image.url(:medium)  if listing.photos.length > 0 %>
+                                <%= image_tag listing.photos[0].image.url(:medium) if listing.photos.length > 0 %>
                             <% end %>
                         </div>
 
@@ -218,7 +198,7 @@
                                     <%= image_tag listing.user.image,class:"img-circle profile-1" %>
                                 </div>
                                 <div class="price-card">
-                                    <%= listing.price_pernight %> 円     
+                                    <%= listing.price_pernight %> 円
                                 </div>
                             </div>
                         </div>
@@ -242,9 +222,8 @@
 
         // Construct the circle for each value in citymap.
         // Note: We scale the area of the circle based on the population.
-        
-          // Add the circle for this city to the map.
-          var cityCircle = new google.maps.Circle({
+        // Add the circle for this city to the map.
+        var cityCircle = new google.maps.Circle({
             strokeColor: '#FF0000',
             strokeOpacity: 0.8,
             strokeWeight: 2,
@@ -261,20 +240,20 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI6mhtqy5Q33d1FuXB168lutk9a0UM_Fo&callback=initMap">
 </script>
 
+<!-- datepickerの参考URL：https://jqueryui.com/datepicker/ -->
 <script>
 $(function() {
-
   //日付について、それが選択不可能なものかを決める関数
   // inArray()について:dmyがdisabledDates配列になければ-1を返す
   function disable(date){
     dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
     return [$.inArray(dmy,disabledDates) == -1]; //trueを返す
   }
-
+  
   // 不可能な日付の配列
   disabledDates = [];
-
-  //事前にdatepickerに選択不可能な日付をセットするajax
+  
+  // 事前にdatepickerに選択不可能な日付をセットするajax
   $.ajax({
     url: '/setdate',
     // this data is data for sending to url
@@ -319,7 +298,7 @@ $(function() {
               data: inputs,
               success: function(data){
                   if (data.duplicate) {
-                      // 重なりがある場合は、エラーメッセイジを表示
+                      // 重なりがある場合は、エラーメッセージを表示
                       // また、合計料金,手数料を隠す
                       // 予約ボタンの押せないようにする
                       $('#duplicate-message').removeClass('hidden');
@@ -332,15 +311,15 @@ $(function() {
                       // 合計料金をtotalに入れる
                       // total-priceを表示させる
                       $('#duplicate-message').addClass('hidden');
-                      
+
                       var sitter_price = days * <%= @listing.price_pernight %> ;
                       var applicaton_fee =  Math.round(sitter_price * 0.136) ;
                       var price_total = sitter_price + applicaton_fee;
                       $('#sitter-price').removeClass('hidden');
                       $('#total-price').removeClass('hidden');
                       $('#applicaton-fee').removeClass('hidden');
-                      $('#sitter-price .col-md-8').text("シッター料:"+"<%= @listing.price_pernight %>"+"円"+" x "+days+"日");
-                      $('#applicaton-fee .col-md-8').text("手数料:シッター料×13.6%");
+                      $('#sitter-price .col-md-8').text("シッター料:"+"<%= @listing.price_pernight %>"+"円"+" × "+days+"日");
+                      $('#applicaton-fee .col-md-8').text("手数料:シッター料 × 13.6%");
                       $('#total-price .col-md-8').text("合計料金");
 
                       $('#sitter-price .col-md-4').text(sitter_price+"円");
@@ -379,7 +358,7 @@ $(function() {
               data: inputs,
               success: function(data){
                   if (data.duplicate) {
-                     // 重なりがある場合は、エラーメッセ-ジを表示
+                      // 重なりがある場合は、エラーメッセ-ジを表示
                       // 合計料金,手数料を隠す
                       // 予約ボタンの押せないようにする
                       $('#duplicate-message').removeClass('hidden');
@@ -388,7 +367,7 @@ $(function() {
                       $('#total-price').addClass('hidden');
                       $('.btn-wide').attr('disabled', true);
                   }else{
-                      // 重なりがなくokな場合は、エラーメッセージをかくす
+                      // 選択日の重なりがない場合は、エラーメッセージをかくす
                       // 合計料金をtotalに入れる
                       // total-priceを表示させる
                       $('#duplicate-message').addClass('hidden');
