@@ -125,6 +125,7 @@ class ReservationsController < ApplicationController
       listing = Listing.find(params[:listing_id])
 
       check = listing.reservations.where("? < start_date AND end_date < ?",start_date,end_date)
-      check.size > 0? true : false 
+      # check.size > 0? true : false
+      check.exists? 
     end
 end
