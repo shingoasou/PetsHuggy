@@ -126,6 +126,10 @@ class ReservationsController < ApplicationController
 
       check = listing.reservations.where("? < start_date AND end_date < ?",start_date,end_date)
       # check.size > 0? true : false
-      check.exists? 
+      if check.exists?
+        true
+      else
+        false
+      end
     end
 end
